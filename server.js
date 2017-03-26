@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
+const massive = require('massive')
 
 const app = express()
 
@@ -17,6 +18,9 @@ const options = {
 }
 app.engine('jsx', require('express-react-views').createEngine(options))
 
+const connectionString = 'postgres://postgres:@localhost/massive_quotes'
+const db = massive.connectSync({connectionString})
+
 // Handlers
 const appHandler = () => {
   console.log('Magic happen at http://localhost:3000/')
@@ -27,7 +31,12 @@ const helloHandler = (req, res) => {
 }
 
 const postQuotesHandler = (req, res) => {
-  res.send(req.body)
+  const handleSave = (err, result) => {
+    if (err) throw err
+    console.log('saved.')
+    res.redirect('/')
+  }
+  db.saveDoc('quotes', req.body, handleSave)
 }
 
 // Routes
