@@ -26,8 +26,12 @@ const appHandler = () => {
   console.log('Magic happen at http://localhost:3000/')
 }
 
-const helloHandler = (req, res) => {
-  res.render('index', {name: 'Obi Wan'})
+const indexHandler = (req, res) => {
+  const handleFind = (err, quotes) => {
+    if (err) throw err
+    res.render('index', {quotes})
+  }
+  db.quotes.findDoc({}, handleFind)
 }
 
 const postQuotesHandler = (req, res) => {
@@ -40,7 +44,7 @@ const postQuotesHandler = (req, res) => {
 }
 
 // Routes
-app.get('/', helloHandler)
+app.get('/', indexHandler)
 app.post('/quotes', postQuotesHandler)
 
 app.listen(3000, appHandler)
