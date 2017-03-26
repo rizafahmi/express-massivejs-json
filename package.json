@@ -1,0 +1,11 @@
+{
+  "name": "express-massive-jsonb",
+  "version": "0.0.1",
+  "description": "CRUD App using Express MassiveJS ORM",
+  "main": "server.js",
+  "author": "Riza Fahmi <rizafahmi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
