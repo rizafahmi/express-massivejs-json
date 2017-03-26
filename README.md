@@ -10,7 +10,7 @@ This is app for listing quotes from Star Wars characters with this features:
 2. [x] Read quote
 3. [x] Update quote
 4. [x] Delete quote
-5. Search quote
+5. [x] Search quote
 
 To make this project more interesting, let's add React server rendering for Express.
 

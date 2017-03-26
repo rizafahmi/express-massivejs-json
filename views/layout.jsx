@@ -6,7 +6,7 @@ const Layout = (props) => {
       <head>
         <title>{props.title}</title>
       </head>
-      <body>{props.children}</body>
+      <body style={{margin: 20}}>{props.children}</body>
     </html>
   )
 }

@@ -31,7 +31,8 @@ const indexHandler = (req, res) => {
   const handleFind = (err, quotes) => {
     if (err) throw err
     res.render('index', {
-      quotes
+      quotes,
+      term: ''
     })
   }
   db.quotes.findDoc({}, handleFind)
@@ -69,6 +70,19 @@ const deleteQuoteHandler = (req, res) => {
   db.quotes.destroy({id: req.params.id}, handleDelete)
 }
 
+const searchHandler = (req, res) => {
+  db.quotes.searchDoc({
+    keys: ['quotes', 'character'],
+    term: req.query.term
+  }, (err, results) => {
+    if (err) throw err
+    res.render('index', {
+      quotes: results,
+      term: req.query.term
+    })
+  })
+}
+
 // Routes
 app.get('/', indexHandler)
 
@@ -77,5 +91,8 @@ app.post('/quotes', postQuotesHandler)
 app.get('/quotes/:id/edit', editQuotesHandler)
 app.post('/quotes/:id/edit', updateQuoteHandler)
 app.get('/quotes/:id/delete', deleteQuoteHandler)
+
+// search
+app.get('/search', searchHandler)
 
 app.listen(3000, appHandler)
