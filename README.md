@@ -12,6 +12,8 @@ This is app for listing quotes from Star Wars characters with this features:
 4. Delete quote
 5. Search quote
 
+To make this project more interesting, let's add React server rendering for Express.
+
 ## Tech Stacks
 
 * [ExpressJS](http://expressjs.com/)

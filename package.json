@@ -6,11 +6,15 @@
   "author": "Riza Fahmi <rizafahmi@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.2"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-react-views": "^0.10.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js -e js,jsx"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
