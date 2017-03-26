@@ -30,7 +30,9 @@ const appHandler = () => {
 const indexHandler = (req, res) => {
   const handleFind = (err, quotes) => {
     if (err) throw err
-    res.render('index', {quotes})
+    res.render('index', {
+      quotes
+    })
   }
   db.quotes.findDoc({}, handleFind)
 }
@@ -38,7 +40,7 @@ const indexHandler = (req, res) => {
 const postQuotesHandler = (req, res) => {
   const handleSave = (err, result) => {
     if (err) throw err
-    console.log('saved.')
+    console.log('data saved.')
     res.redirect('/')
   }
   db.saveDoc('quotes', Object.assign({}, req.body, {_id: uuid()}), handleSave)
@@ -59,6 +61,14 @@ const updateQuoteHandler = (req, res) => {
   res.redirect('/')
 }
 
+const deleteQuoteHandler = (req, res) => {
+  const handleDelete = (err, result) => {
+    if (err) throw err
+    res.redirect('/')
+  }
+  db.quotes.destroy({id: req.params.id}, handleDelete)
+}
+
 // Routes
 app.get('/', indexHandler)
 
@@ -66,5 +76,6 @@ app.get('/', indexHandler)
 app.post('/quotes', postQuotesHandler)
 app.get('/quotes/:id/edit', editQuotesHandler)
 app.post('/quotes/:id/edit', updateQuoteHandler)
+app.get('/quotes/:id/delete', deleteQuoteHandler)
 
 app.listen(3000, appHandler)

@@ -12,7 +12,10 @@ const IndexComponent = (props) => {
           return (
             <li key={index}>{quote.quotes} --
               <small>{quote.character}</small>(
-              <a href={`/quotes/${quote.id}/edit`}>Edit</a>
+              <a href={`/quotes/${quote.id}/edit`}>Edit</a>&nbsp;
+              <a
+                id='delete'
+                href={`/quotes/${quote.id}/delete`}>Delete</a>
                )
             </li>
           )
