@@ -1,9 +1,11 @@
 const path = require('path')
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 // Configurations
+app.use(bodyParser.urlencoded({extended: true}))
 app.set('views', path.join('./views'))
 app.set('view engine', 'jsx')
 const options = {
@@ -24,7 +26,12 @@ const helloHandler = (req, res) => {
   res.render('index', {name: 'Obi Wan'})
 }
 
+const postQuotesHandler = (req, res) => {
+  res.send(req.body)
+}
+
 // Routes
 app.get('/', helloHandler)
+app.post('/quotes', postQuotesHandler)
 
 app.listen(3000, appHandler)
