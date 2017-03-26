@@ -44,8 +44,27 @@ const postQuotesHandler = (req, res) => {
   db.saveDoc('quotes', Object.assign({}, req.body, {_id: uuid()}), handleSave)
 }
 
+const editQuotesHandler = (req, res) => {
+  const handleFind = (err, data) => {
+    if (err) throw err
+    res.render('update', {data: data})
+  }
+  db.quotes.findDoc({id: req.params.id}, handleFind)
+}
+
+const updateQuoteHandler = (req, res) => {
+  const updateData = Object.assign({}, req.body, {id: req.params.id})
+  console.log(updateData)
+  db.quotes.saveDoc(updateData)
+  res.redirect('/')
+}
+
 // Routes
 app.get('/', indexHandler)
+
+// quotes
 app.post('/quotes', postQuotesHandler)
+app.get('/quotes/:id/edit', editQuotesHandler)
+app.post('/quotes/:id/edit', updateQuoteHandler)
 
 app.listen(3000, appHandler)

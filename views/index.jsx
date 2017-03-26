@@ -1,20 +1,19 @@
 import React from 'react'
 
-import Layout from './layout.jsx'
+import Layout from './Layout.jsx'
+import Form from './Form.jsx'
 
 const IndexComponent = (props) => {
   return (
     <Layout title={'Index'}>
-      <form method='POST' action='/quotes'>
-        <input type='text' placeholder='character' name='character' />
-        <textarea placeholder='quotes...' name='quotes' />
-        <button type='submit'>Save</button>
-      </form>
+      <Form method='POST' action='/quotes' type='Save' />
       <ul>
         {props.quotes.map((quote, index) => {
           return (
             <li key={index}>{quote.quotes} --
-              <small>{quote.character}</small>
+              <small>{quote.character}</small>(
+              <a href={`/quotes/${quote.id}/edit`}>Edit</a>
+               )
             </li>
           )
         })}
