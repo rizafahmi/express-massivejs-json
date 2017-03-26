@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const massive = require('massive')
+const uuid = require('uuid/v4')
 
 const app = express()
 
@@ -40,7 +41,7 @@ const postQuotesHandler = (req, res) => {
     console.log('saved.')
     res.redirect('/')
   }
-  db.saveDoc('quotes', req.body, handleSave)
+  db.saveDoc('quotes', Object.assign({}, req.body, {_id: uuid()}), handleSave)
 }
 
 // Routes
